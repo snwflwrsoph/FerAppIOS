@@ -11,7 +11,7 @@ import SwiftUI
 struct FerAppIOSApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ConfiguracionScreen()
         }
     }
 }
