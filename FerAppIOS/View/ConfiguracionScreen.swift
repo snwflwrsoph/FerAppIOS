@@ -77,17 +77,22 @@ struct ConfiguracionScreen: View {
                         .font(.title)
                         .padding(.top, 20)
                         .padding(.bottom, 20)
-                    HStack {
-                        VStack {
-                            Text("Permisos")
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .bold()
-                                .font(.title2)
-                            Text("Modificar los permisos de la app")
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .font(.body)
+                    NavigationLink {
+                        PermisosScreen()
+                    } label: {
+                        HStack {
+                            VStack {
+                                Text("Permisos")
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .bold()
+                                    .font(.title2)
+                                Text("Modificar los permisos de la app")
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .font(.body)
+                            }
+                            Image(systemName: "chevron.right")
                         }
-                        Image(systemName: "chevron.right")
+                        .foregroundColor(.primary)
                     }
                     Divider()
                     Text("Ayuda")
