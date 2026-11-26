@@ -12,112 +12,119 @@ struct ConfiguracionScreen: View {
     @State private var switchModoOscuro: Bool = false
     
     var body: some View {
-        Text("Configuración")
-            .multilineTextAlignment(.center)
-            .bold()
-            .font(.largeTitle)
-            .padding()
-        ScrollView {
-            VStack(spacing: 16) {
-                Text("Preferencias")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .bold()
-                    .font(.title)
-                    .padding(.bottom, 20)
-                HStack() {
-                    VStack {
-                        Text("Notificaciones")
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .bold()
-                            .font(.title2)
-                        Text("Recibir Notificaciones")
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .font(.body)
+        NavigationStack {
+            Text("Configuración")
+                .multilineTextAlignment(.center)
+                .bold()
+                .font(.largeTitle)
+                .padding()
+            ScrollView {
+                VStack(spacing: 16) {
+                    Text("Preferencias")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .bold()
+                        .font(.title)
+                        .padding(.bottom, 20)
+                    HStack() {
+                        VStack {
+                            Text("Notificaciones")
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .bold()
+                                .font(.title2)
+                            Text("Recibir Notificaciones")
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .font(.body)
+                        }
+                        Toggle("", isOn: $switchNotificaciones)
+                            .labelsHidden()
+                            .tint(.blue)
                     }
-                    Toggle("", isOn: $switchNotificaciones)
-                        .labelsHidden()
-                        .tint(.blue)
-                }
-                Divider()
-                Text("Accesibilidad")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .bold()
-                    .font(.title)
-                    .padding(.top, 20)
-                    .padding(.bottom, 20)
-                HStack() {
-                    VStack {
-                        Text("Modo oscuro")
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .bold()
-                            .font(.title2)
-                        Text("Activar modo oscuro")
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .font(.body)
+                    Divider()
+                    Text("Accesibilidad")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .bold()
+                        .font(.title)
+                        .padding(.top, 20)
+                        .padding(.bottom, 20)
+                    HStack() {
+                        VStack {
+                            Text("Modo oscuro")
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .bold()
+                                .font(.title2)
+                            Text("Activar modo oscuro")
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .font(.body)
+                        }
+                        Toggle("", isOn: $switchModoOscuro)
+                            .labelsHidden()
+                            .tint(.blue)
                     }
-                    Toggle("", isOn: $switchModoOscuro)
-                        .labelsHidden()
-                        .tint(.blue)
-                }
-                Divider()
-                HStack {
-                    VStack {
-                        Text("Tamaño de texto")
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .bold()
-                            .font(.title2)
-                        Text("Modificar el tamaño de texto")
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .font(.body)
+                    Divider()
+                    NavigationLink {
+                        TamanoTextoScreen()
+                    } label: {
+                        HStack {
+                            VStack {
+                                Text("Tamaño de texto")
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .bold()
+                                    .font(.title2)
+                                Text("Modificar el tamaño de texto")
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .font(.body)
+                            }
+                            Image(systemName: "chevron.right")
+                        }
+                        .foregroundColor(.primary)
                     }
-                    Image(systemName: "chevron.right")
-                }
-                Divider()
-                HStack {
-                    VStack {
-                        Text("Lector de Pantalla")
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .bold()
-                            .font(.title2)
-                        Text("Activar el lector de pantalla")
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .font(.body)
+                    Divider()
+                    HStack {
+                        VStack {
+                            Text("Lector de Pantalla")
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .bold()
+                                .font(.title2)
+                            Text("Activar el lector de pantalla")
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .font(.body)
+                        }
+                        Image(systemName: "chevron.right")
                     }
-                    Image(systemName: "chevron.right")
-                }
-                Divider()
-                Text("Privacidad")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .bold()
-                    .font(.title)
-                    .padding(.top, 20)
-                    .padding(.bottom, 20)
-                HStack {
-                    VStack {
-                        Text("Permisos")
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .bold()
-                            .font(.title2)
-                        Text("Modificar los permisos de la app")
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .font(.body)
+                    Divider()
+                    Text("Privacidad")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .bold()
+                        .font(.title)
+                        .padding(.top, 20)
+                        .padding(.bottom, 20)
+                    HStack {
+                        VStack {
+                            Text("Permisos")
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .bold()
+                                .font(.title2)
+                            Text("Modificar los permisos de la app")
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .font(.body)
+                        }
+                        Image(systemName: "chevron.right")
                     }
-                    Image(systemName: "chevron.right")
+                    Divider()
+                    Text("Ayuda")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .bold()
+                        .font(.title)
+                        .padding(.top, 20)
+                        .padding(.bottom, 20)
+                    Text("Reportar un problema")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .font(.body)
+                        .underline()
                 }
-                Divider()
-                Text("Ayuda")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .bold()
-                    .font(.title)
-                    .padding(.top, 20)
-                    .padding(.bottom, 20)
-                Text("Reportar un problema")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .font(.body)
-                    .underline()
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                .padding(30)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-            .padding(30)
         }
     }
 }
