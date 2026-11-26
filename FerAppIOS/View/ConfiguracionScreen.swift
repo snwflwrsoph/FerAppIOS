@@ -20,31 +20,10 @@ struct ConfiguracionScreen: View {
                 .padding()
             ScrollView {
                 VStack(spacing: 16) {
-                    Text("Preferencias")
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .bold()
-                        .font(.title)
-                        .padding(.bottom, 20)
-                    HStack() {
-                        VStack {
-                            Text("Notificaciones")
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .bold()
-                                .font(.title2)
-                            Text("Recibir Notificaciones")
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .font(.body)
-                        }
-                        Toggle("", isOn: $switchNotificaciones)
-                            .labelsHidden()
-                            .tint(.blue)
-                    }
-                    Divider()
                     Text("Accesibilidad")
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .bold()
                         .font(.title)
-                        .padding(.top, 20)
                         .padding(.bottom, 20)
                     HStack() {
                         VStack {
