@@ -1,4 +1,5 @@
 import SwiftUI
+import EventKit
 
 struct NewsDetailView: View {
     let announcement: Announcement
@@ -6,7 +7,11 @@ struct NewsDetailView: View {
     var onCalendar: () -> Void = {}
 
     @Environment(\.dismiss) private var dismiss
-
+    
+    @State private var showCalendarSheet = false
+    @State private var eventStore = EKEventStore()
+    
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
@@ -72,23 +77,33 @@ struct NewsDetailView: View {
                     }
                     .accessibilityLabel(announcement.isLikedByUser ? "Quitar me gusta" : "Me gusta")
                     Text(String(announcement.likes))
-
-                    Button(action: onCalendar) {
-                        Image(systemName: "calendar")
-                            .font(.system(size: 18, weight: .medium))
-                            .foregroundStyle(.primary)
-                            .frame(width: 40, height: 40)
-                            .background(Color(.secondarySystemFill))
-                            .clipShape(Circle())
+                    
+                    if announcement.hasEvent{
+                        Button {
+                            onCalendar()
+                            showCalendarSheet = true
+                        } label: {
+                            Image(systemName: "calendar")
+                                .font(.system(size: 18, weight: .medium))
+                                .foregroundStyle(.primary)
+                                .frame(width: 40, height: 40)
+                                .background(Color(.secondarySystemFill))
+                                .clipShape(Circle())
+                        }
+                        .accessibilityLabel("Agregar a calendario")
+                        Text("Agregar a calendario")
                     }
-                    .accessibilityLabel("Agregar a calendario")
-                    Text("Agregar a calendario")
+                    
                 }
             }
         }
         .padding()
         .toolbar(.hidden, for: .navigationBar)
-        .toolbar(.hidden, for: .tabBar) 
+        .toolbar(.hidden, for: .tabBar)
+        .sheet(isPresented: $showCalendarSheet) {
+            EventEditView(eventStore: eventStore, announcement: announcement, isPresented: $showCalendarSheet)
+                .ignoresSafeArea()
+        }
     }
 }
 

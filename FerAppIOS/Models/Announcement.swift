@@ -47,6 +47,23 @@ struct Announcement: Identifiable, Hashable {
     var location: String? = nil
 }
 
+// extensión para obtener la fecha y poder agregar eventos al calendario
+extension Announcement {
+    var eventStartDate: Date? {
+        eventStartMillis.map {Date(timeIntervalSince1970: TimeInterval($0) / 1000)}
+    }
+    
+    var eventEndDate: Date? {
+        if let end = eventEndMillis {
+            return Date(timeIntervalSince1970: TimeInterval(end) / 100)
+        }
+        return eventStartDate?.addingTimeInterval(60 * 60)
+    }
+    
+    var hasEvent: Bool { eventStartDate != nil }
+}
+
+
 private let textoDesayuno = """
 En un ambiente de convivencia, gratitud y compromiso social, la Fundación celebró un desayuno conmemorativo con motivo de su aniversario, reuniendo a colaboradores, benefactores, voluntarios e invitados especiales que han sido parte fundamental de su trayectoria.
 
@@ -127,7 +144,8 @@ extension Announcement {
             date: "18 de noviembre del 2026",
             category: .events,
             profile: "FERLogo",
-            mainImage: "DiscursoEsposos"
+            mainImage: "DiscursoEsposos",
+            eventStartMillis: 1_764_345_600_000
         ),
         Announcement(
             id: "5",
